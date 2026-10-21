@@ -66,3 +66,13 @@ fun max(a: Int): Int {
     return if (a > 0) a else 0
 }
 max(-3)
+
+// COMMAND ----------
+
+val x=1
+print(x)
+x.and()
+
+// COMMAND ----------
+
+

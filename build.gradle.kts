@@ -91,6 +91,7 @@ val displayApiJar = tasks.register<Jar>("displayApiJar") {
 
 tasks.shadowJar {
     archiveClassifier = "all"
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     mergeServiceFiles() // The compiler and ktor find their plugins through service files.
     exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
     manifest {
