@@ -1,0 +1,68 @@
+// Kotlin notebook source
+// MAGIC %md
+// MAGIC # Welcome to Kotlin Notebook
+// MAGIC
+// MAGIC Cells run in one Kotlin session, so values and functions defined in one cell are visible in the next.
+// MAGIC
+// MAGIC - **Shift+Enter** runs a cell and moves to the next one, **Ctrl+Enter** runs it in place.
+// MAGIC - **Ctrl+Space** shows completions; they also pop up as you type.
+// MAGIC - Double-click a markdown cell to edit it.
+
+// COMMAND ----------
+
+data class City(val name: String, val country: String, val population: Int)
+
+val cities = listOf(
+    City("Tokyo", "Japan", 37_400_000),
+    City("Delhi", "India", 31_000_000),
+    City("Shanghai", "China", 27_100_000),
+    City("São Paulo", "Brazil", 22_000_000),
+)
+
+// COMMAND ----------
+
+val largest = cities.maxBy { it.population }
+println("Largest: ${largest.name} with ${"%,d".format(largest.population)} people")
+cities.sortedBy { it.name }.map { it.name }
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC Return `html(...)` to render HTML, for example a table:
+
+// COMMAND ----------
+
+html(buildString {
+    append("<table><tr><th>City</th><th>Population</th></tr>")
+    for (city in cities) append("<tr><td>${city.name}</td><td>${"%,d".format(city.population)}</td></tr>")
+    append("</table>")
+})
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC Pull in libraries from Maven Central with `@file:DependsOn`:
+
+// COMMAND ----------
+
+@file:DependsOn("org.apache.commons:commons-lang3:3.17.0")
+
+import org.apache.commons.lang3.StringUtils
+
+StringUtils.abbreviate("Kotlin notebooks run cells in process with the K2 compiler", 32)
+
+// COMMAND ----------
+
+1+1
+
+// COMMAND ----------
+
+import org.apache.commons.lang3.StringUtils
+
+val x=1+2
+println(x)
+
+fun max(a: Int): Int {
+    return if (a > 0) a else 0
+}
+max(-3)
