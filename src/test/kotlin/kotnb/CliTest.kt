@@ -107,9 +107,13 @@ class CliTest {
     @Test
     fun `Ctrl+C interrupts a running snippet and discards input at the prompt`() {
         expect("Or try :help.")
+        // Warm up the REPL compiler so subsequent snippets evaluate immediately.
+        type("1 + 1\r")
+        expect("res1: Int = 2")
         type("Thread.sleep(60_000)\r")
         Thread.sleep(1500)
-        type("\u0003")
+        // Simulate OS interrupt signal to the terminal while the snippet is sleeping.
+        terminal.raise(org.jline.terminal.Terminal.Signal.INT)
         expect("Interrupted.")
         type("val discarded = 1\u0003")
         type("\"still running\"\r")
